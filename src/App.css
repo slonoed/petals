@@ -1,5 +1,24 @@
+.dices {
+  display: grid;
+  grid-template-columns: repeat(5, 60px);
+  flex: 1;
+  margin-top: 40px;
+}
+
+.check-state {
+  height: 40px;
+}
+
 .App {
+  box-sizing: border-box;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  padding: 30px;
 }
 
 .App-logo {
