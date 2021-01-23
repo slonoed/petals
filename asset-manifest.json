@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/petals/static/css/main.78377de0.chunk.css",
-    "main.js": "/petals/static/js/main.dec30840.chunk.js",
-    "main.js.map": "/petals/static/js/main.dec30840.chunk.js.map",
+    "main.css": "/petals/static/css/main.a8362077.chunk.css",
+    "main.js": "/petals/static/js/main.a9b7f6e4.chunk.js",
+    "main.js.map": "/petals/static/js/main.a9b7f6e4.chunk.js.map",
     "runtime-main.js": "/petals/static/js/runtime-main.8328c022.js",
     "runtime-main.js.map": "/petals/static/js/runtime-main.8328c022.js.map",
     "static/css/2.150d169a.chunk.css": "/petals/static/css/2.150d169a.chunk.css",
@@ -12,14 +12,14 @@
     "static/js/3.978677ed.chunk.js.map": "/petals/static/js/3.978677ed.chunk.js.map",
     "index.html": "/petals/index.html",
     "static/css/2.150d169a.chunk.css.map": "/petals/static/css/2.150d169a.chunk.css.map",
-    "static/css/main.78377de0.chunk.css.map": "/petals/static/css/main.78377de0.chunk.css.map",
+    "static/css/main.a8362077.chunk.css.map": "/petals/static/css/main.a8362077.chunk.css.map",
     "static/js/2.45273800.chunk.js.LICENSE.txt": "/petals/static/js/2.45273800.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8328c022.js",
     "static/css/2.150d169a.chunk.css",
     "static/js/2.45273800.chunk.js",
-    "static/css/main.78377de0.chunk.css",
-    "static/js/main.dec30840.chunk.js"
+    "static/css/main.a8362077.chunk.css",
+    "static/js/main.a9b7f6e4.chunk.js"
   ]
 }
