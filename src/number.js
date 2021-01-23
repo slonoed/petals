@@ -31,21 +31,25 @@ export default function NumberSelector({ onChange }) {
     if (moving) {
       const handler = (event) => {
         event.preventDefault();
-        const touch = event.touches[0];
+        const clientX = event.touches
+          ? event.touches[0].clientX
+          : event.clientX;
         if (typeof prevX.current !== "number") {
-          prevX.current = touch.clientX;
+          prevX.current = clientX;
           return;
         }
 
-        const diff = touch.clientX - prevX.current;
-        prevX.current = touch.clientX;
+        const diff = clientX - prevX.current;
+        prevX.current = clientX;
 
         setPosition((pos) => minmaxPos(pos + diff));
       };
       document.addEventListener("touchmove", handler, { passive: false });
+      document.addEventListener("mousemove", handler, { passive: false });
       return () => {
         prevX.current = null;
         document.removeEventListener("touchmove", handler);
+        document.removeEventListener("mousemove", handler);
       };
     }
 
@@ -68,7 +72,13 @@ export default function NumberSelector({ onChange }) {
   }, [position, moving]);
 
   return (
-    <div className="number" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+    <div
+      className="number"
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      onMouseDown={onTouchStart}
+      onMouseUp={onTouchEnd}
+    >
       <div
         style={{ transform: `translate(${position}px, 0px)` }}
         className="ninternal"
