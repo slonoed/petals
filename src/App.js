@@ -6,6 +6,7 @@ import "./App.css";
 import "./dices.css";
 import Rating from "./rating";
 import Die from "./die";
+import Number from "./number";
 
 const pointsToWin = 7;
 
@@ -142,7 +143,7 @@ function App() {
 
       <div className="check-state">
         {state.checkState === "correct" ? (
-          <Alert variant="success">Correct!</Alert>
+          <Alert variant="success">Correct</Alert>
         ) : null}
         {state.checkState === "incorrect" ? (
           <Alert variant="danger">
@@ -153,6 +154,7 @@ function App() {
 
       <div>
         <br />
+        <Number />
         <br />
         <div style={{ fontSize: "30px" }}>{state.num}</div>
         <input

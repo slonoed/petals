@@ -1,0 +1,14 @@
+.number {
+  font-size: 40px;
+  background: gray;
+}
+
+.ninternal {
+  display: grid;
+  grid-template-columns: repeat(40, 50px);
+  grid-gap: 10px;
+}
+
+.num {
+  box-sizing: border-box;
+}
