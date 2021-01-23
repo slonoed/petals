@@ -11,7 +11,7 @@ import NumberSelector from "./number";
 const pointsToWin = 7;
 
 const initialState = {
-  screen: "game", // intro
+  screen: "intro", // intro
   points: 0,
   dices: [],
   num: 0,
