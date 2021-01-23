@@ -1,14 +1,32 @@
 .number {
-  font-size: 40px;
+  font-size: 30px;
+  line-height: 60px;
   background: gray;
+  width: 300px;
+  margin: 0 auto;
+  position: relative;
+  background: linear-gradient(
+    to right,
+    hsl(212deg 67% 36% / 0%) 0%,
+    hsl(207deg 69% 50%) 52%,
+    hsl(206deg 70% 70% / 0%) 100%
+  );
 }
 
 .ninternal {
   display: grid;
-  grid-template-columns: repeat(40, 50px);
-  grid-gap: 10px;
+  grid-template-columns: repeat(60, 50px);
 }
 
 .num {
   box-sizing: border-box;
+}
+
+.nframe {
+  position: absolute;
+  top: -5px;
+  left: 125px;
+  height: 70px;
+  width: 50px;
+  border: 5px solid hsl(252deg 73% 21%);
 }

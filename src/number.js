@@ -1,15 +1,23 @@
 import { useState, useEffect, useRef } from "react";
 import "./number.css";
 
-export default function Number() {
+const cellSize = 50;
+const maxPos = cellSize * 2.5;
+const minPos = -cellSize * 16.5;
+
+const minmax = (min, max) => (n) => Math.max(min, Math.min(max, n));
+
+const minmaxPos = minmax(minPos, maxPos);
+
+export default function NumberSelector({ onChange }) {
   const nums = [];
-  for (var i = 0, len = 40; i < len; i++) {
-    nums.push(<div className="num">{i}</div>);
+  for (var i = 0, len = 20; i < len; i++) {
+    nums.push(<div className="num">{i * 2}</div>);
   }
 
   const prevX = useRef(null);
 
-  const [position, setPosition] = useState(100);
+  const [position, setPosition] = useState(cellSize * 3);
   const [moving, setMoving] = useState(false);
 
   const onTouchStart = () => {
@@ -22,6 +30,7 @@ export default function Number() {
   useEffect(() => {
     if (moving) {
       const handler = (event) => {
+        event.preventDefault();
         const touch = event.touches[0];
         if (typeof prevX.current !== "number") {
           prevX.current = touch.clientX;
@@ -31,17 +40,32 @@ export default function Number() {
         const diff = touch.clientX - prevX.current;
         prevX.current = touch.clientX;
 
-        setPosition((pos) => pos + diff);
+        setPosition((pos) => minmaxPos(pos + diff));
       };
-      document.addEventListener("touchmove", handler);
+      document.addEventListener("touchmove", handler, { passive: false });
       return () => {
         prevX.current = null;
         document.removeEventListener("touchmove", handler);
       };
     }
 
-    setPosition((position) => Math.round(position / 50) * 50);
+    setPosition(
+      (position) =>
+        minmaxPos(
+          (Math.round((position + cellSize / 2) / cellSize) - 0.5) * cellSize
+        )
+      //                        get current cell     conv to px     move to cell center
+    );
   }, [moving]);
+
+  useEffect(() => {
+    if (!moving) {
+      const num = ((maxPos - position) / cellSize) * 2;
+      if (Number.isInteger(num)) {
+        onChange(num);
+      }
+    }
+  }, [position, moving]);
 
   return (
     <div className="number" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
@@ -51,6 +75,7 @@ export default function Number() {
       >
         {nums}
       </div>
+      <div className="nframe"></div>
     </div>
   );
 }

@@ -6,7 +6,7 @@ import "./App.css";
 import "./dices.css";
 import Rating from "./rating";
 import Die from "./die";
-import Number from "./number";
+import NumberSelector from "./number";
 
 const pointsToWin = 7;
 
@@ -38,10 +38,9 @@ function reducer(state, action) {
   }
 
   if (action.type === "numChange") {
-    const str = action.value.trim();
     return {
       ...state,
-      num: str ? Number.parseInt(action.value, 10) : -1,
+      num: action.value,
     };
   }
 
@@ -54,7 +53,6 @@ function reducer(state, action) {
     const isCorrect = correct === state.num;
     const points = isCorrect ? state.points + 1 : 0;
 
-    console.log(state.dices);
     if (points === pointsToWin) {
       return {
         ...state,
@@ -105,7 +103,7 @@ function App() {
       <div className="App">
         <div>
           <h2>Petals around roses</h2>
-          <Button onClick={() => dispatch({ type: "start" })}>
+          <Button size="lg" onClick={() => dispatch({ type: "start" })}>
             Start game
           </Button>
         </div>
@@ -147,24 +145,15 @@ function App() {
         ) : null}
         {state.checkState === "incorrect" ? (
           <Alert variant="danger">
-            Incorrect! Correct number is {calcCorrect(state)})
+            Incorrect! Correct number is {calcCorrect(state)}
           </Alert>
         ) : null}
       </div>
 
       <div>
         <br />
-        <Number />
-        <br />
-        <div style={{ fontSize: "30px" }}>{state.num}</div>
-        <input
-          style={{ width: "100%", marginBottom: "30px" }}
-          value={state.num === -1 ? "" : state.num}
-          onChange={run("numChange")}
-          type="range"
-          min="0"
-          max="40"
-          step="2"
+        <NumberSelector
+          onChange={(value) => dispatch({ type: "numChange", value })}
         />
         <br />
         <div

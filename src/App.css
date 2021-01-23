@@ -1,7 +1,8 @@
 .dices {
   flex: 1;
-  margin-top: 40px;
   position: relative;
+  width: 300px;
+  margin: 0 auto;
 }
 .dices > div {
   transform: scale(0.5);
