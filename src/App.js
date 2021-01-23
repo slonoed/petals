@@ -1,9 +1,16 @@
 import { useReducer, useEffect } from "react";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
 import Dice from "react-dice-roll";
 import "./App.css";
+import "./dices.css";
+import Rating from "./rating";
+import Die from "./die";
+
+const pointsToWin = 7;
 
 const initialState = {
-  screen: "intro", // intro
+  screen: "game", // intro
   points: 0,
   dices: [],
   num: 0,
@@ -38,21 +45,16 @@ function reducer(state, action) {
   }
 
   if (action.type === "check") {
-    const correct = state.dices.reduce((acc, d) => {
-      let n = 0;
-      if (d === 3) {
-        n = 2;
-      }
-      if (d === 5) {
-        n = 4;
-      }
-      return acc + n;
-    }, 0);
+    if (state.checkState !== "none" || state.dices.length === 0) {
+      return state;
+    }
+    const correct = calcCorrect(state);
 
     const isCorrect = correct === state.num;
     const points = isCorrect ? state.points + 1 : 0;
 
-    if (points === 7) {
+    console.log(state.dices);
+    if (points === pointsToWin) {
       return {
         ...state,
         screen: "win",
@@ -102,9 +104,9 @@ function App() {
       <div className="App">
         <div>
           <h2>Petals around roses</h2>
-          <button onClick={() => dispatch({ type: "start" })}>
+          <Button onClick={() => dispatch({ type: "start" })}>
             Start game
-          </button>
+          </Button>
         </div>
       </div>
     );
@@ -116,9 +118,11 @@ function App() {
         <div>
           <h2>You won!</h2>
           <b>You know the secret now!</b>
-          <button onClick={() => dispatch({ type: "again" })}>
+          <br />
+          <br />
+          <Button onClick={() => dispatch({ type: "again" })}>
             Play again
-          </button>
+          </Button>
         </div>
       </div>
     );
@@ -126,23 +130,25 @@ function App() {
 
   return (
     <div className="App App_game">
-      <div className="points">Points: {state.points}</div>
+      <Rating max={pointsToWin} current={state.points} />
 
       <div className="dices">
         {state.dices.map((d, i) => (
-          <div key={i}>
-            <Dice
-              rollingTime={300}
-              size={50}
-              onRoll={(value) => console.log(value)}
-              cheatValue={d}
-            />
+          <div key={i} className={"dice-" + i}>
+            <Die number={d} />
           </div>
         ))}
       </div>
 
       <div className="check-state">
-        {state.checkState === "none" ? "" : state.checkState}
+        {state.checkState === "correct" ? (
+          <Alert variant="success">Correct!</Alert>
+        ) : null}
+        {state.checkState === "incorrect" ? (
+          <Alert variant="danger">
+            Incorrect! Correct number is {calcCorrect(state)})
+          </Alert>
+        ) : null}
       </div>
 
       <div>
@@ -150,7 +156,7 @@ function App() {
         <br />
         <div style={{ fontSize: "30px" }}>{state.num}</div>
         <input
-          style={{ width: "100%" }}
+          style={{ width: "100%", marginBottom: "30px" }}
           value={state.num === -1 ? "" : state.num}
           onChange={run("numChange")}
           type="range"
@@ -159,11 +165,44 @@ function App() {
           step="2"
         />
         <br />
-        <button onClick={run("check")}>Check</button>{" "}
-        <button onClick={run("roll")}>Roll</button>
+        <div
+          style={{
+            display: "grid",
+            gridGap: "1em",
+            gridTemplateColumns: "1fr",
+          }}
+        >
+          {state.checkState !== "none" || state.dices.length === 0 ? (
+            <Button onClick={run("roll")} variant="success">
+              Roll
+            </Button>
+          ) : (
+            <Button
+              onClick={run("check")}
+              disabled={state.checkState !== "none" || state.dices.length === 0}
+            >
+              Check
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );
 }
 
 export default App;
+
+function calcCorrect(state) {
+  const correct = state.dices.reduce((acc, d) => {
+    let n = 0;
+    if (d === 3) {
+      n = 2;
+    }
+    if (d === 5) {
+      n = 4;
+    }
+    return acc + n;
+  }, 0);
+
+  return correct;
+}

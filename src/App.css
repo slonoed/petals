@@ -1,8 +1,34 @@
 .dices {
-  display: grid;
-  grid-template-columns: repeat(5, 60px);
   flex: 1;
   margin-top: 40px;
+  position: relative;
+}
+.dices > div {
+  transform: scale(0.5);
+  position: absolute;
+}
+
+.dice-0 {
+  top: 10px;
+  left: 10px;
+}
+
+.dice-1 {
+  top: 20px;
+  left: 150px;
+}
+
+.dice-2 {
+  top: 110px;
+  left: 30px;
+}
+.dice-3 {
+  top: 160px;
+  left: 210px;
+}
+.dice-4 {
+  top: 220px;
+  left: 80px;
 }
 
 .check-state {
