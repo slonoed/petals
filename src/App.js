@@ -1,3 +1,4 @@
+/* global gtag */
 import { useReducer, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
@@ -23,6 +24,11 @@ function rnd() {
 }
 
 function reducer(state, action) {
+  gtag("event", "action", {
+    type: action.type,
+    value: action.value,
+  });
+
   if (action.type === "again") {
     return {
       ...initialState,
