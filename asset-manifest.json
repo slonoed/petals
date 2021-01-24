@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/petals/static/css/main.678d13c7.chunk.css",
-    "main.js": "/petals/static/js/main.64409964.chunk.js",
-    "main.js.map": "/petals/static/js/main.64409964.chunk.js.map",
+    "main.js": "/petals/static/js/main.aec33176.chunk.js",
+    "main.js.map": "/petals/static/js/main.aec33176.chunk.js.map",
     "runtime-main.js": "/petals/static/js/runtime-main.8328c022.js",
     "runtime-main.js.map": "/petals/static/js/runtime-main.8328c022.js.map",
     "static/css/2.150d169a.chunk.css": "/petals/static/css/2.150d169a.chunk.css",
@@ -21,6 +21,6 @@
     "static/css/2.150d169a.chunk.css",
     "static/js/2.45273800.chunk.js",
     "static/css/main.678d13c7.chunk.css",
-    "static/js/main.64409964.chunk.js"
+    "static/js/main.aec33176.chunk.js"
   ]
 }
