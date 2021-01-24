@@ -82,3 +82,9 @@
     transform: rotate(360deg);
   }
 }
+
+.app_main {
+  background-image: url(./rose.png);
+  background-repeat: no-repeat;
+  background-position: bottom center;
+}

@@ -106,7 +106,7 @@ function App() {
 
   if (state.screen === "intro") {
     return (
-      <div className="App">
+      <div className="App app_main">
         <div>
           <h2>Petals around roses</h2>
           <Button size="lg" onClick={() => dispatch({ type: "start" })}>
