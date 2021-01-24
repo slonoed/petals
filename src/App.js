@@ -59,7 +59,10 @@ function reducer(state, action) {
     const isCorrect = correct === state.num;
     const points = isCorrect ? state.points + 1 : 0;
 
+    gtag("event", "check", { correct: isCorrect ? "yes" : "no" });
+
     if (points === pointsToWin) {
+      gtag("event", "win");
       return {
         ...state,
         screen: "win",
@@ -158,9 +161,11 @@ function App() {
 
       <div>
         <br />
-        <NumberSelector
-          onChange={(value) => dispatch({ type: "numChange", value })}
-        />
+        {state.dices.length > 0 ? (
+          <NumberSelector
+            onChange={(value) => dispatch({ type: "numChange", value })}
+          />
+        ) : null}
         <br />
         <div
           style={{
